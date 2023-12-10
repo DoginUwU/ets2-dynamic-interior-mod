@@ -1,0 +1,1 @@
+export const PROCESS_NAME = 'eurotrucks2.exe'

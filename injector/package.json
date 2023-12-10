@@ -1,0 +1,17 @@
+{
+  "name": "injector",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "start": "tsx ./src/index.ts"
+  },
+  "dependencies": {
+    "memoryjs": "^3.5.1"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.4",
+    "tsx": "^4.6.2"
+  }
+}
