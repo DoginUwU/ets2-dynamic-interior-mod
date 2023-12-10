@@ -51,7 +51,7 @@ LRESULT __stdcall WndProc(const HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lPar
 long __stdcall hkPresent11(IDXGISwapChain* pSwapChain, UINT SyncInterval, UINT Flags) {
 	static bool init = false;
 
-	if (!init) {
+    if (!init) {
         if (SUCCEEDED(pSwapChain->GetDevice(__uuidof(ID3D11Device), (void**)& pDevice))) {
             pDevice->GetImmediateContext(&pContext);
             DXGI_SWAP_CHAIN_DESC sd;
