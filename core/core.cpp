@@ -23,20 +23,20 @@ ID3D11RenderTargetView* mainRenderTargetView;
 
 // Current game always use SetCursorPos to center the cursor, so we can just disable it
 void DisableSetCursorPos() {
-        PVOID pSetCursorPos = GetProcAddress(GetModuleHandle("user32.dll"), "SetCursorPos");
-        DWORD dwOldProtect = 0;
-        VirtualProtect(pSetCursorPos, 2, PAGE_EXECUTE_READWRITE, &dwOldProtect);
-        *(BYTE*)pSetCursorPos = 0xC3;
-        VirtualProtect(pSetCursorPos, 2, dwOldProtect, &dwOldProtect);
+    PVOID pSetCursorPos = GetProcAddress(GetModuleHandle("user32.dll"), "SetCursorPos");
+    DWORD dwOldProtect = 0;
+    VirtualProtect(pSetCursorPos, 2, PAGE_EXECUTE_READWRITE, &dwOldProtect);
+    *(BYTE*)pSetCursorPos = 0xC3;
+    VirtualProtect(pSetCursorPos, 2, dwOldProtect, &dwOldProtect);
 }
 
 void InitImGui()
 {
     ImGui::CreateContext();
-	ImGuiIO& io = ImGui::GetIO();
-	io.ConfigFlags = ImGuiConfigFlags_NoMouseCursorChange;
-	ImGui_ImplWin32_Init(window);
-	ImGui_ImplDX11_Init(pDevice, pContext);
+    ImGuiIO& io = ImGui::GetIO();
+    io.ConfigFlags = ImGuiConfigFlags_NoMouseCursorChange;
+    ImGui_ImplWin32_Init(window);
+    ImGui_ImplDX11_Init(pDevice, pContext);
 }
 
 LRESULT __stdcall WndProc(const HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
@@ -74,10 +74,10 @@ long __stdcall hkPresent11(IDXGISwapChain* pSwapChain, UINT SyncInterval, UINT F
     }
 
     ImGui_ImplDX11_NewFrame();
-	ImGui_ImplWin32_NewFrame();
-	ImGui::NewFrame();
+    ImGui_ImplWin32_NewFrame();
+    ImGui::NewFrame();
 
-	ImGui::Begin("Test Window");
+    ImGui::Begin("Test Window");
 
     // VK_MENU is the ALT key
     if(GetAsyncKeyState(VK_MENU) & 0x80000) {
