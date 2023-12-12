@@ -45,7 +45,7 @@ LRESULT __stdcall WndProc(const HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lPar
         return true;
     }
 
-	return CallWindowProc(oWndProc, hWnd, uMsg, wParam, lParam);
+    return CallWindowProc(oWndProc, hWnd, uMsg, wParam, lParam);
 }
 
 long __stdcall hkPresent11(IDXGISwapChain* pSwapChain, UINT SyncInterval, UINT Flags) {
@@ -77,16 +77,13 @@ long __stdcall hkPresent11(IDXGISwapChain* pSwapChain, UINT SyncInterval, UINT F
     ImGui_ImplWin32_NewFrame();
     ImGui::NewFrame();
 
-    ImGui::Begin("Test Window");
+    // ImGui::Begin("Test Window");
 
     // VK_MENU is the ALT key
-    if(GetAsyncKeyState(VK_MENU) & 0x80000) {
-        ImGui::GetIO().MouseDrawCursor = true;
-    } else {
-        ImGui::GetIO().MouseDrawCursor = false;
-    }
+    ImGui::GetIO().MouseDrawCursor = GetAsyncKeyState(VK_MENU) & 0x80000;
+    
 
-    ImGui::End();
+    // ImGui::End();
 
     ImGui::Render();
 
