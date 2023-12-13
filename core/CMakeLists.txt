@@ -10,13 +10,21 @@ project ("core")
 set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)
 
 include_directories(
+  include
   ${CMAKE_CURRENT_SOURCE_DIR}/vendor/kiero
   ${CMAKE_CURRENT_SOURCE_DIR}/vendor/kiero/minhook/include
   ${CMAKE_CURRENT_SOURCE_DIR}/vendor/imgui
   ${CMAKE_CURRENT_SOURCE_DIR}/vendor/imgui/backends
+  ${CMAKE_CURRENT_SOURCE_DIR}/vendor/scs
 )
 
-add_library (core SHARED "core.cpp" "vendor/kiero/kiero.cpp")
+file(GLOB SOURCES "src/*.cpp")
+
+add_library (core SHARED ${SOURCES})
+
+add_library(Kiero STATIC
+  "vendor/kiero/kiero.cpp"
+)
 
 add_library(MinHook STATIC
   "vendor/kiero/minhook/src/buffer.c"
@@ -38,7 +46,7 @@ add_library(ImGui STATIC
 
 target_include_directories(core PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/vendor/imgui)
 
-target_link_libraries(core PRIVATE ImGui MinHook)
+target_link_libraries(core PRIVATE Kiero ImGui MinHook)
 
 if (CMAKE_VERSION VERSION_GREATER 3.12)
   set_property(TARGET core PROPERTY CXX_STANDARD 20)
